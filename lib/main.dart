@@ -1,12 +1,13 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:test_application/Phrase.dart';
 
 void main() => runApp(
       MaterialApp(debugShowCheckedModeBanner: false, home: MyHomePage()),
     );
 
-List<String> hexColors = [
+List<String> _hexColors = [
   "#FFFFFF",
   "#C0C0C0",
   "#808080",
@@ -59,8 +60,7 @@ class _MyHomePageState extends State<MyHomePage> {
               setState(() {});
             },
             child: Container(
-                color: _colorFromHex(
-                    hexColors[Random().nextInt(hexColors.length - 1)]),
+                color: _randomColor(),
                 child: Center(
                   child: Text(
                     "Hey there!",
@@ -68,43 +68,22 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                 )),
           ),
-          Phrase("Hello!", context),
-          Phrase("How are you?", context),
-          Phrase("What is your name?", context),
-          Phrase("Have a nice day!", context),
-          Phrase("How do you do?", context),
-          Phrase("I'm glad to see you!", context),
-          Phrase("What's news?", context),
-          Phrase("Nice to meet you!", context),
+          Phrase("Hello!"),
+          Phrase("How are you?"),
+          Phrase("What is your name?"),
+          Phrase("Have a nice day!"),
+          Phrase("How do you do?"),
+          Phrase("I'm glad to see you!"),
+          Phrase("What's news?"),
+          Phrase("Nice to meet you!"),
         ],
       ),
     );
   }
 }
 
-Color _colorFromHex(String hexColor) {
+Color _randomColor() {
+  String hexColor = _hexColors[Random().nextInt(_hexColors.length - 1)];
   final hexCode = hexColor.replaceAll('#', '');
   return Color(int.parse('FF$hexCode', radix: 16));
-}
-
-class Phrase extends StatelessWidget {
-  final String phrase;
-  final BuildContext context;
-
-  Phrase(this.phrase, this.context);
-
-  @override
-  Widget build(BuildContext context) {
-    int fullHeight = MediaQuery.of(context).size.height.toInt();
-    int fullWidth = MediaQuery.of(context).size.width.toInt();
-    return Positioned(
-      left: (Random().nextInt(fullWidth - phrase.length * 8)).toDouble(),
-      bottom: (Random().nextInt(fullHeight - phrase.length * 8)).toDouble(),
-      child: Text(
-        phrase,
-        softWrap: true,
-        style: TextStyle(fontSize: 15),
-      ),
-    );
-  }
 }
