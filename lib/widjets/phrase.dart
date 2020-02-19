@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 
 class Phrase extends StatelessWidget {
   final String phrase;
+
   Phrase(this.phrase);
 
   @override
@@ -16,7 +17,7 @@ class Phrase extends StatelessWidget {
       child: Text(
         phrase,
         softWrap: true,
-        style: TextStyle(fontSize: 15),
+        style: Theme.of(context).textTheme.body2,
       ),
     );
   }
